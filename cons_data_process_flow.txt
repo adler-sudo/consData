@@ -1,0 +1,40 @@
+# my process flow for obtaining the conservation data
+1. create basic 25 GB digital ocean comp @ SFO for quick rsync (upgrade later)
+2. bedops
+	a. wget linux binaries
+	b. unzip
+	c. cp to usr/local/bin
+3. rsync:
+
+	rsync -avz --progress \
+        rsync://hgdownload.cse.ucsc.edu/goldenPath/hg38/phyloP100way/ ./
+
+4. change folder name to vertebrate
+5. convert all wigFix to bed:
+
+	for fn in `ls vertebrate/*.gz`; \
+    	do gunzip -c $fn \
+        	| wig2bed - \
+        	> ${fn%%.*}.bed; \
+    	done
+
+7. sort-bed .bed > sorted.bed
+
+8. bedmap:
+	
+	for chr in `seq 1 22` X Y; do bedmap --echo --echo-map-score --delim '\t' ../sorted_high_val_genome_coords.bed chromes/chr${chr}.bed > answer.chr${chr}.high_val_genome_coords.bed; done
+
+	# ^ can be simplified so that we are not mapping the entire sorted bed file \
+	# of coordinates to each chromosome's bed file. should only be mapping \
+	# to the chrom bed file for which those lines are meant for. maybe this \
+	# is where just combining each of the chrom bed files into one would really \
+	# save a lot of time. OR splitting each line from the input bed file.
+
+	# i also repeated the above command for each of the flank_before and flank_after \
+	# bed files (after sorting of course :))
+
+9. then i manually moved over to my laptop drive
+	a. certainly an easier way to do this
+	b. may be able to automate many of the last few steps into one \
+		smooth pipeline
+
