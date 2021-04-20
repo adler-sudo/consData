@@ -21,7 +21,7 @@ import os
 
 
 # set directory
-os.chdir('C:/Users/james/rbpBiohack/flank_after_table_browser/flank_after_reduced_cons')
+os.chdir(<directory>)
 
 # read in the conservation data
 file = 'phyloDataFlankAfter04162021.tsv'
