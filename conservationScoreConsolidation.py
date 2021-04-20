@@ -41,12 +41,37 @@ df3['group'] = 'flank_after'
 # concat the dfs
 masterdf = pd.concat([df1, df2, df3])
 
-# THIS MAY NEED TO BE MOVED TO A DIFFERENT FILE
+# TODO: THIS MAY NEED TO BE MOVED TO A DIFFERENT FILE
 # stripplot
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-a4_dims = (11.7, 8.27)
+a4_dims = (30,17)
 fig, ax = plt.subplots(figsize=a4_dims)
+ax.set_ylabel('filler',fontsize=30)
+ax.set_xlabel('filler',fontsize=30)
+ax.set_xticklabels('filler', fontsize=25)
 sns.violinplot(ax=ax, data=masterdf, x='group', y='averageConservationScore')
-sns.stripplot(ax=ax, data=masterdf, x='group', y='averageConservationScore').set_title('Average Conservation Score by Group')
+sns.stripplot(ax=ax, data=masterdf, x='group', y='averageConservationScore').set_title('Average Conservation Score by Group',fontsize=35)
+
+# TODO: MOVE THIS TO A DIFFERENT FILE TOO!
+# summary stats
+masterdf.groupby('group').describe()['averageConservationScore']
+
+# TODO: MOVE THIS TO DIFFERENT FILE TOO!
+# t test
+from scipy.stats import ttest_ind
+
+
+ttest_ind(df1.averageConservationScore,
+          df3.averageConservationScore,
+          equal_var=False,
+          alternative='greater')
+
+
+# TODO: MOVE THIS TOO!
+# create displot to visualize where high_val_genome coords are more \ 
+    # highly represented
+sns.displot(masterdf[['averageConservationScore','group']],
+            x='averageConservationScore',
+            hue='group')
