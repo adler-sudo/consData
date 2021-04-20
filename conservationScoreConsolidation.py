@@ -16,7 +16,7 @@ import os
 
 
 # define dir
-directory = 'C:/Users/james/rbpBiohack/'
+directory = <your directory>
 
 os.chdir(directory)
 
