@@ -15,7 +15,7 @@ import pandas as pd
 
 
 # specify bed file from meridith
-file = 'C:/Users/james/Downloads/high_val_genome_coords.bed'
+file = <file>
 
 # convert bed file to dataframe
 df = pd.read_csv(file, sep='\t', header=None)
