@@ -69,9 +69,53 @@ ttest_ind(df1.averageConservationScore,
           alternative='greater')
 
 
+
+
 # TODO: MOVE THIS TOO!
 # create displot to visualize where high_val_genome coords are more \ 
     # highly represented
 sns.displot(masterdf[['averageConservationScore','group']],
             x='averageConservationScore',
             hue='group')
+
+
+
+
+# TODO: MOVE THIS TOO!
+# create replicates and analyze distribution
+# import modules
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# initiate empty lists
+highValReplicateMeans = []
+flankBeforeReplicateMeans = []
+flankAfterReplicateMeans = []
+
+
+# generate replicates
+np.random.seed(100)
+
+for num in range(100):
+    highValRep = [np.random.choice(df1.averageConservationScore) for _ in df1.averageConservationScore]
+    highValReplicateMeans.append(np.mean(highValRep))
+    
+for num in range(100):
+    flankRep = [np.random.choice(df2.averageConservationScore) for _ in df2.averageConservationScore]
+    flankBeforeReplicateMeans.append(np.mean(flankRep))
+
+for num in range(100):
+    flankRep = [np.random.choice(df3.averageConservationScore) for _ in df3.averageConservationScore]
+    flankAfterReplicateMeans.append(np.mean(flankRep))
+    
+    
+# plot the distriubtions for the new replicate lists
+plt.hist(highValReplicateMeans,color='green',label='high_val_reps')
+plt.hist(flankBeforeReplicateMeans,label='flank_before_reps',color='blue')
+plt.hist(flankAfterReplicateMeans,label='flank_after_reps',color='yellow')
+plt.xlabel('averageRepConservationScore')
+plt.ylabel('count')
+plt.title('Replicate Histograms by Average Conservation Score')
+plt.legend()
+plt.show()
