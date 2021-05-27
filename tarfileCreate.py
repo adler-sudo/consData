@@ -14,7 +14,7 @@ import glob
 today = '05252021'
 
 # define dir
-os.chdir('C:/Users/james/rbpBiohack/genomic_coords_{}/genomic_coords_{}_simplified'.format(today,today))
+os.chdir('<directory>/genomic_coords_{}/genomic_coords_{}_simplified'.format(today,today))
   
 # establish tracker
 counter = 0
