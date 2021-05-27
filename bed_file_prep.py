@@ -14,12 +14,16 @@ import pandas as pd
 import os
 
 
+# define today for file naming
+today = '05252021'
+
 # set working directory
-os.chdir('C:/Users/james/rbpBiohack/flank_after_table_browser')
+directory = 'C:/Users/james/rbpBiohack/genomic_coords_{}/genomic_coords_{}_simplified/'.format(today,today)
+os.chdir(directory)
 
 
 # define and read in file
-file = 'C:/Users/james/rbpBiohack/flank_after_table_browser/flank_after.bed'
+file = ''.join([directory,'all_exons.bed'])
 df = pd.read_csv(file,
                  sep='\t',
                  header=None,
@@ -30,7 +34,7 @@ chunksize = 1000
 for start in range(0,len(df),chunksize):
     print(start)
     subset_df = df.iloc[start:start + chunksize]
-    subset_df.to_csv('flank_after_reduced_{}.bed'.format(start),
+    subset_df.to_csv('consData_reduced_{}.bed'.format(start),
                      sep='\t',
                      header=None,
                      index=False)

@@ -16,7 +16,7 @@ import os
 
 
 # define dir
-directory = <your directory>
+directory = 'C:/Users/james/rbpBiohack/'
 
 os.chdir(directory)
 
@@ -54,19 +54,25 @@ ax.set_xticklabels('filler', fontsize=25)
 sns.violinplot(ax=ax, data=masterdf, x='group', y='averageConservationScore')
 sns.stripplot(ax=ax, data=masterdf, x='group', y='averageConservationScore').set_title('Average Conservation Score by Group',fontsize=35)
 
+
+
+
 # TODO: MOVE THIS TO A DIFFERENT FILE TOO!
 # summary stats
 masterdf.groupby('group').describe()['averageConservationScore']
+
+
 
 # TODO: MOVE THIS TO DIFFERENT FILE TOO!
 # t test
 from scipy.stats import ttest_ind
 
 
-ttest_ind(df1.averageConservationScore,
+ttest = ttest_ind(df1.averageConservationScore,
           df3.averageConservationScore,
           equal_var=False,
           alternative='greater')
+
 
 
 

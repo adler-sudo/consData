@@ -13,27 +13,31 @@ can be used to grab conservation score data.
 
 # import modules
 import os
+from pathlib import Path
 import pandas as pd
 
 
+# define today for writing unique files
+today = '05252021'
+
 # change working directory
-os.chdir('C:/Users/james/rbpBiohack/flank_after_table_browser/flank_after_reduced_cons')
-
-# create list of all conservation files
-conservationFiles = os.listdir()
-
-# initiate master dataframe
-masterdf = pd.DataFrame(columns=['chr','start','stop','conservation_score'])
+os.chdir('C:/Users/james/rbpBiohack/genomic_coords_{}/genomic_coords_{}_simplified/consData'.format(today,today))
 
 # define directory of interest
 directory = '.'
 
+# define dataframe columns
+columns = ['chr','start','stop','conservation_score']
+
+# initiate master dataframe
+masterdf = pd.DataFrame(columns=columns)
+
 # loop through each file in the ConservationData_phyloP folder
-for file in conservationFiles:
+for file in os.listdir():
 
   # create new dataframe for each file
-  df = pd.DataFrame(columns=['chr','start','stop','conservation_score'])
-
+  df = pd.DataFrame(columns=columns)
+  
   # define full path
   file = '/'.join([directory,file])
 
@@ -43,7 +47,7 @@ for file in conservationFiles:
     lines = f.readlines()
 
     for l in lines:
-
+      print(l)
       # grab chromosome number (changes for each 'sample')
       # NEED TO ACCOUNT FOR X CHROMOSOME
       if l.startswith('#'):
@@ -71,5 +75,10 @@ for file in conservationFiles:
   masterdf = masterdf.append(df, ignore_index=True)
   print(masterdf.tail())
   
+
+filename = Path('/'.join([os.getcwd(),'consDataByBase{}.tsv'.format(today)]))
+print(filename)
+
 # write to csv
-masterdf.to_csv('phyloDataFlankAfter04162021.tsv',index=False, sep='\t')
+if not filename.exists():
+    masterdf.to_csv(filename,index=False, sep='\t')
