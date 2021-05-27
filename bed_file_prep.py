@@ -18,7 +18,7 @@ import os
 today = '05252021'
 
 # set working directory
-directory = 'C:/Users/james/rbpBiohack/genomic_coords_{}/genomic_coords_{}_simplified/'.format(today,today)
+directory = '<directory>/genomic_coords_{}/genomic_coords_{}_simplified/'.format(today,today)
 os.chdir(directory)
 
 
