@@ -25,10 +25,10 @@ from pathlib import Path
 today = '05252021'
 
 # set directory MERIDITH
-os.chdir('C:/Users/james/rbpBiohack/genomic_coords_{}/genomic_coords_{}_simplified/consData'.format(today,today))
+os.chdir('<directory>/genomic_coords_{}/genomic_coords_{}_simplified/consData'.format(today,today))
 
 # set directory LESLIE
-# os.chdir('C:/Users/james/openASO/Both_ASO_siRNA_BlastResults/consData')
+# os.chdir('<directory>/Both_ASO_siRNA_BlastResults/consData')
 
 
 # read in the conservation data
