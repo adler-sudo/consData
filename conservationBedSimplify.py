@@ -25,10 +25,10 @@ import glob
 today = '05252021'
 
 # set working directory
-os.chdir('C:/Users/james/rbpBiohack/genomic_coords_{}'.format(today))
+os.chdir('<directory>/genomic_coords_{}'.format(today))
 
 # destination directory
-directory = 'C:/Users/james/rbpBiohack/genomic_coords_{}/genomic_coords_{}_simplified'.format(today,today)
+directory = '<directory>/genomic_coords_{}/genomic_coords_{}_simplified'.format(today,today)
 
 # empty master dataframe
 master_df = pd.DataFrame()
