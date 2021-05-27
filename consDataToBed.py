@@ -21,7 +21,7 @@ import pandas as pd
 today = '05252021'
 
 # change working directory
-os.chdir('C:/Users/james/rbpBiohack/genomic_coords_{}/genomic_coords_{}_simplified/consData'.format(today,today))
+os.chdir('<directory>/genomic_coords_{}/genomic_coords_{}_simplified/consData'.format(today,today))
 
 # define directory of interest
 directory = '.'
